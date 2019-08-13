@@ -45,6 +45,7 @@
   }
 
   img {
+    flex-shrink: 0;
     width: 16rem;
     margin: 1rem 0;
   }
