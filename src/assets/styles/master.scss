@@ -1,0 +1,43 @@
+@import "./screen-size.scss";
+
+body, html {
+    font-family: "Libre Franklin", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #2d3748;
+    font-size: 1rem;
+}
+
+* {
+    box-sizing: border-box;
+  }
+
+.container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: $sm) {
+    .container {
+        max-width: $sm;
+    }
+}
+
+@media (min-width: $md) {
+    .container {
+        max-width: $md;
+    }
+}
+
+@media (min-width: $lg) {
+    .container {
+        max-width: $lg;
+    }
+}
+
+@media (min-width: $xl) {
+    .container {
+        max-width: $xl;
+    }
+}
