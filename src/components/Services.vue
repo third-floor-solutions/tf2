@@ -8,19 +8,12 @@
         class="description"
       >We use modern technologies to create impactful and engaging experiences for website and mobile. Your website is a living entity and requires care.</p>
       <div class="skill-container">
-        <div
-          class="skill-item"
-          v-for="(s,i ) in skillset"
-          :key="i"
-        >
-          <span class="pr-20 lg:pr-0">
-            <p class="text-2xl font-medium lg:text-center" :class="s.custom_class">{{ s.title }}</p>
-            <p class="text-base text-gray-500 leading-tight lg:text-center">{{ s.description }}</p>
+        <div class="skill-item" v-for="(s,i ) in skillset" :key="i">
+          <span class="skill-container">
+            <p class="skill-title" :class="s.custom_class">{{ s.title }}</p>
+            <p class="skill-description">{{ s.description }}</p>
           </span>
-          <img
-            class="w-24 absolute -right-24 lg:h-24 lg:right-auto lg:static lg:flex-shrink-0"
-            :src="s.logo"
-          />
+          <img class="skill-image" :src="s.logo" />
         </div>
       </div>
     </div>
@@ -67,12 +60,38 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "@/assets/styles/color.scss";
+$vue-color: #41b883;
+$laravel-color: #f4645f;
+$graphql-color: #e10098;
+$nodejs-color: #43853d;
+$react-color: #60dafb;
+
+.text-color-vue {
+  color: $vue-color;
+}
+
+.text-color-laravel {
+  color: $laravel-color;
+}
+
+.text-color-graphql {
+  color: $graphql-color;
+}
+
+.text-color-nodejs {
+  color: $nodejs-color;
+}
+
+.text-color-react {
+  color: $react-color;
+}
+
 .services {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 75vh;
-  padding: 5rem 0;
   background-color: #f7fafc;
 
   .container {
@@ -80,6 +99,7 @@ export default {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    padding: 5rem 1.5rem;
   }
   h2 {
     font-weight: 500;
@@ -93,24 +113,55 @@ export default {
     color: #718096;
     font-weight: 500;
     line-height: 1.75rem;
+    margin-bottom: 2rem;
   }
 
   .skill-container {
-    display:flex;
+    display: flex;
     flex-direction: column;
     width: 100%;
 
+    .skill-item:not(:last-child) {
+      margin-bottom: 1.5rem;
+    }
+
     .skill-item {
-        // m-2 inline-block shadow-md overflow-hidden rounded p-6 bg-white flex items-center h-32 justify-between relative lg:h-300 lg:w-64 lg:flex-col lg:flex-col-reverse lg:content-start lg:justify-around
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        padding: 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content:  space-between;
-        position: relative;
-        border-radius: .25rem;
-        background-color: #ffffff;
-        margin: 1rem;
+      // m-2 inline-block shadow-md overflow-hidden rounded p-6 bg-white flex items-center h-32 justify-between relative lg:h-300 lg:w-64 lg:flex-col lg:flex-col-reverse lg:content-start lg:justify-around
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      border-radius: 0.25rem;
+      background-color: #ffffff;
+      overflow: hidden;
+      height: 8rem;
+
+      .skill-container {
+        padding-right: 6rem;
+      }
+      .skill-title {
+        font-size: 1.5rem;
+        font-weight: 500;
+        padding: 0;
+        margin: 0 0 0.3rem 0;
+      }
+
+      .skill-description {
+        // text-base text-gray-500 leading-tight lg:text-center
+        color: #a0aec0;
+        line-height: 1.25;
+        padding: 0;
+        margin: 0;
+      }
+
+      .skill-image {
+        position: absolute;
+        width: 6rem;
+        right: -1.5rem;
+      }
     }
   }
 }

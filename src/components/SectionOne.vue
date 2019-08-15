@@ -2,14 +2,14 @@
   <div class="section-one">
     <div class="container">
       <h2 class="title">
-          <slot name="title"></slot>
+        <slot name="title"></slot>
       </h2>
       <div class="content">
         <slot name="img">
           <img src="/undraw/undraw_business_deal_cpi9.svg" />
         </slot>
         <div class="description">
-            <slot></slot>
+          <slot></slot>
         </div>
       </div>
     </div>
@@ -24,17 +24,16 @@
   width: 100%;
   background: #ffffff;
   min-height: 75vh;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
   .container {
-    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 5rem 1.5rem;
   }
 
   .title {

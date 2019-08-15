@@ -6,10 +6,10 @@
       </h2>
       <div class="content">
         <slot name="img">
-            <img src="/undraw/undraw_web_devices_ad58.svg" />
+          <img src="/undraw/undraw_web_devices_ad58.svg" />
         </slot>
         <div class="description">
-            <slot></slot>
+          <slot></slot>
         </div>
       </div>
     </div>
@@ -21,17 +21,16 @@
 .section-two {
   overflow: hidden;
   width: 100%;
-  background:#edf2f7;
+  background: #edf2f7;
   min-height: 75vh;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
   .container {
-    padding: 1.5rem;
     display: flex;
+    padding: 5rem 1.5rem;
     flex-direction: column;
     align-items: center;
   }

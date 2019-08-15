@@ -7,11 +7,6 @@
       <p
         class="hamble-brag"
       >A fast and growing software company, that build fast, elegant and high quality products.</p>
-      <!-- <p class="text-2xl leading-snug font-medium text-center">We bring ideas into reality.</p> -->
-
-      <!-- <p
-            class="text-center leading-snug"
-      >Engage with us now, and let's start making your ideas into reality.</p>-->
       <a
         @click="showDialog = true"
         class="bg-yellow-500 text-yellow-100 font-bold uppercase shadow mt-10 py-3 px-8 rounded cursor-pointer"
