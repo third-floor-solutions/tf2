@@ -13,7 +13,7 @@
         <a :href="mediaLinks.facebook" target="_blank" class="w-8 cursor-pointer">
           <FacebookSVG />
         </a>
-        <a :href="mediaLinks.linkedin" target="_blank" class="w-8 cursor-pointer">
+        <a :href="mediaLinks.linkedIn" target="_blank" class="w-8 cursor-pointer">
           <LinkedInSVG />
         </a>
       </div>
@@ -49,10 +49,27 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+@import "@/assets/styles/screen-size.scss";
 footer {
   color: #ffffff;
   background-color: #1a202c;
   font-size: 1rem;
+  position: relative;
+  padding: 1.5rem 0;
+}
+
+footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("/undraw/undraw_connected_world_wuay.svg");
+  background-size: 150%;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.2;
 }
 
 .container {
@@ -63,16 +80,19 @@ footer {
   font-style: normal;
   display: flex;
   flex-direction: column;
+  z-index: 1;
   //px-8 pt-8 pb-4 not-italic
 }
 
 .address-links a {
   text-decoration: none;
+  cursor: pointer;
   color: #ffffff;
+  z-index: 1;
 }
 
 .address-links a:not(:last-child) {
-    margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .address-links a:last-child {
@@ -94,24 +114,15 @@ footer {
 .social-media-links a {
   color: #ffffff;
   width: 2rem;
+  z-index: 1;
 }
 
-footer {
-  position: relative;
-  padding: 1.5rem 0;
-}
 
-footer::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url("/undraw/undraw_connected_world_wuay.svg");
-  background-size: 150%;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.2;
+
+@media (min-width: $lg) {
+  .container {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 </style>
