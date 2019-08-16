@@ -34,6 +34,7 @@
       <p>Your product will start taking shape and rapid prototyping. Through collaborative and integrated process and development enables us to make quick, pursuit adjustments based on user and clients feedback software product that people love to use and that delivers clear business outcomes.</p>
     </SectionTwo>
     <Services />
+    <GetStarted />
     <FooterView />
   </div>
 </template>
@@ -45,6 +46,7 @@ import SectionOne from "@/components/SectionOne";
 import SectionTwo from "@/components/SectionTwo";
 import Services from "@/components/Services";
 import FooterView from "@/components/FooterView";
+import GetStarted from "@/components/GetStarted";
 
 export default {
   name: "home",
@@ -53,7 +55,8 @@ export default {
     SectionOne,
     SectionTwo,
     Services,
-    FooterView
+    FooterView,
+    GetStarted
   }
 };
 </script>

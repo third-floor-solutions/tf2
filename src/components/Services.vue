@@ -1,13 +1,11 @@
 <template>
   <div class="services">
-    <div
-      class="container mx-auto flex border-transparent px-3 py-4 flex-col items-center justify-center relative"
-    >
+    <div class="container">
       <h2>Sharpest tools from our shed</h2>
       <p
         class="description"
       >We use modern technologies to create impactful and engaging experiences for website and mobile. Your website is a living entity and requires care.</p>
-      <div class="skill-container">
+      <div class="skill-wrapper">
         <div class="skill-item" v-for="(s,i ) in skillset" :key="i">
           <span class="skill-container">
             <p class="skill-title" :class="s.custom_class">{{ s.title }}</p>
@@ -60,7 +58,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "@/assets/styles/screen-size.scss";
 @import "@/assets/styles/color.scss";
+
 $vue-color: #41b883;
 $laravel-color: #f4645f;
 $graphql-color: #e10098;
@@ -116,7 +116,7 @@ $react-color: #60dafb;
     margin-bottom: 2rem;
   }
 
-  .skill-container {
+  .skill-wrapper {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -159,8 +159,60 @@ $react-color: #60dafb;
 
       .skill-image {
         position: absolute;
-        width: 6rem;
+        width: 7rem;
         right: -1.5rem;
+      }
+
+      .skill-description {
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
+
+@media (min-width: $md) {
+  .services {
+    .description {
+      font-size: 1.15rem;
+    }
+  }
+}
+@media (min-width: $lg) {
+  .services {
+    h2 {
+      font-size: 2rem;
+    }
+
+    .description {
+      font-size: 1.5rem;
+    }
+    .skill-wrapper {
+      display: flex;
+      flex-direction: row;
+
+      .skill-item:not(:last-child) {
+        margin-right: 1.5rem;
+      }
+      .skill-item {
+        width: 16rem;
+        height: 18rem;
+        display: flex;
+        flex-direction: column-reverse;
+        text-align: center;
+        align-items: center;
+
+        .skill-container {
+          padding: 0;
+        }
+
+        .skill-image {
+          position: static;
+          margin: 0;
+          right: unset;
+          height: 8rem;
+          object-fit: contain;
+          flex-shrink: 0;
+        }
       }
     }
   }

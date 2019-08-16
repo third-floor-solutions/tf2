@@ -71,8 +71,12 @@ footer {
   color: #ffffff;
 }
 
+.address-links a:not(:last-child) {
+    margin-bottom: 0.5rem;
+}
+
 .address-links a:last-child {
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
 }
 
 .email-link {
@@ -90,5 +94,24 @@ footer {
 .social-media-links a {
   color: #ffffff;
   width: 2rem;
+}
+
+footer {
+  position: relative;
+  padding: 1.5rem 0;
+}
+
+footer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("/undraw/undraw_connected_world_wuay.svg");
+  background-size: 150%;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.2;
 }
 </style>
