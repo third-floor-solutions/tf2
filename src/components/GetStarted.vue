@@ -5,13 +5,22 @@
       <div class="message">
         <p>Let's start the beginning of our long and fruitful relationship.</p>
       </div>
-      <a
-        @click="showDialog = true"
-        class="bg-blue-500 cursor-pointer text-blue-200 font-bold uppercase shadow mt-10 py-3 px-8 rounded"
-      >Let's talk</a>
+
+      <ContactUsBtn bgColor="#4299e1" txtColor="#bee3f8" >
+          Let's talk
+      </ContactUsBtn>
     </div>
   </div>
 </template>
+<script>
+import ContactUsBtn from "@/components/ContactUsBtn";
+
+export default {
+    components: {
+        ContactUsBtn
+    }
+}
+</script>
 <style scoped lang="scss">
 .get-started {
   background-color: #1a202c;

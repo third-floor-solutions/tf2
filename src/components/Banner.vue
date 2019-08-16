@@ -7,13 +7,20 @@
       <p
         class="hamble-brag"
       >A fast and growing software company, that build fast, elegant and high quality products.</p>
-      <a
-        @click="showDialog = true"
-        class="bg-yellow-500 text-yellow-100 font-bold uppercase shadow mt-10 py-3 px-8 rounded cursor-pointer"
-      >Partner with us</a>
+
+      <ContactUsBtn bgColor="#ecc94b" txtColor="ivory">Partner with us</ContactUsBtn>
     </div>
   </div>
 </template>
+<script>
+import ContactUsBtn from "@/components/ContactUsBtn";
+
+export default {
+    components: {
+        ContactUsBtn
+    }
+}
+</script>
 <style scoped lang="scss">
 @import "@/assets/styles/screen-size.scss";
 
@@ -66,7 +73,6 @@
     line-height: 1.375;
     font-weight: 500;
     margin: 2rem 0;
-
     font-size: 1rem;
   }
 }
