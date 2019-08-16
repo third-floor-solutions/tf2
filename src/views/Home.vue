@@ -56,7 +56,7 @@ export default {
     SectionTwo,
     Services,
     FooterView,
-    GetStarted
+    GetStarted,
   }
 };
 </script>
