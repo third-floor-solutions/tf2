@@ -59,7 +59,7 @@
     text-align: center;
     color: #718096;
     font-weight: 500;
-    line-height: 1.75rem;
+    line-height: 2rem;
   }
 }
 
