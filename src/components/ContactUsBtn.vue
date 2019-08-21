@@ -9,37 +9,55 @@
       <div class="modal">
         <div class="modal-wrapper">
           <h1 class="modal-label">Let's talk and make things happen.</h1>
-          <form class="w-full max-w-lg">
+          <form  ref="form" @submit="submit" class="w-full max-w-lg">
             <div class="user-info">
               <div class="form-input-container user-info-container">
-                <label class="form-label" for="grid-first-name">First Name</label>
-                <input class="form-input" id="grid-first-name" type="text"  />
+                <label class="form-label">First Name</label>
+                <input
+                  class="form-input"
+                  name="firstName"
+                  v-model="form.firstName"
+                  type="text"
+                  required
+                />
                 <!-- <p class="text-red-500 text-xs italic">Please fill out this field.</p> -->
               </div>
               <div class="form-input-container user-info-container">
                 <label class="form-label" for="grid-last-name">Last Name</label>
-                <input class="form-input" id="grid-last-name" type="text" />
+                <input
+                  class="form-input"
+                  name="lastName"
+                  v-model="form.lastName"
+                  type="text"
+                  required
+                />
               </div>
               <div class="form-input-container">
-                <label class="form-label" for="grid-last-name">Email</label>
-                <input class="form-input" id="grid-last-name" type="text" />
+                <label class="form-label">Email</label>
+                <input class="form-input" name="email" v-model="form.email" type="email" required />
               </div>
             </div>
-              <div class="form-input-container">
-                <label class="form-label" for="grid-last-name">Message</label>
-                <textarea
-                  class="form-input"
-                  id="grid-last-name"
-                  type="textarea"
-                  placeholder="Tell us about your idea or project
+            <div class="form-input-container">
+              <label class="form-label">Message</label>
+              <textarea
+                required
+                @keypress="onMessageKeypress"
+                class="form-input"
+                type="textarea"
+                name="message"
+                rows="7"
+                v-model="form.message"
+                placeholder="Tell us about your idea or project (Shift + Enter for new line)
 "
-                ></textarea>
-              </div>
+              ></textarea>
+            </div>
 
-              <div class="form-input-container submit-btn-container">
-                <label class="btn-close" :for="uniqStr">I changed my mind.</label>
-                <a class="contact-us-btn">Send</a>
-              </div>
+            <div class="form-input-container submit-btn-container">
+              <label class="btn-close" :for="uniqStr">I changed my mind.</label>
+              <input type="submit" class="contact-us-btn" value="Send" />
+            </div>
+
+            <input ref="submitter" type="submit" class="contact-us-btn hidden-submit" />
           </form>
         </div>
       </div>
@@ -47,12 +65,17 @@
   </div>
 </template>
 <script>
-
 export default {
   props: ["bgColor", "txtColor"],
   data() {
     return {
-      state: false
+      state: false,
+      form: {
+        firstName: null,
+        lastName: null,
+        email: null,
+        message: null
+      }
     };
   },
   watch: {
@@ -74,6 +97,22 @@ export default {
         color: this.txtColor
       };
     }
+  },
+  methods: {
+    submit(e) {
+      window.document.body.classList.add("waiting");
+      // Do the request here
+      setTimeout(() => {
+        window.document.body.classList.remove("waiting");
+      }, 3000)
+      return e.preventDefault();
+    },
+    onMessageKeypress(e) {
+      if (event.keyCode == 13 && !event.shiftKey) {
+        this.$refs["submitter"].click();
+        return e.preventDefault();
+      }
+    }
   }
 };
 </script>
@@ -82,6 +121,7 @@ export default {
 
 .contact-us-btn {
   cursor: pointer;
+  border: none;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   padding-left: 2rem;
   padding-right: 2rem;
@@ -90,23 +130,28 @@ export default {
   font-weight: 700;
   border-radius: 0.25rem;
   text-transform: uppercase;
+  outline: none;
+}
+
+.hidden-submit {
+  display: none;
 }
 
 .submit-btn-container {
-    display: flex;
-    margin-top: 2rem;
-    justify-content: space-between;
-align-items: center;
+  display: flex;
+  margin-top: 2rem;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.btn-close  {
-    color: #4a5568;
-    cursor: pointer;
+.btn-close {
+  color: #4a5568;
+  cursor: pointer;
 }
 
 .contact-us-btn {
-    background: #ecc94b;
-    color: #2d3748;
+  background: #ecc94b;
+  color: #2d3748;
 }
 .modal__container {
   position: fixed;
@@ -133,7 +178,7 @@ align-items: center;
   width: 100vw;
   height: 100vh;
   background: #ffffff;
-//   border-radius: 0.25rem;
+  //   border-radius: 0.25rem;
   color: blue;
   display: flex;
   align-items: center;
@@ -170,7 +215,7 @@ align-items: center;
 }
 
 .modal-wrapper {
-    padding: 3rem 0;
+  padding: 3rem 0;
 }
 
 .user-info-container:not(:last-child) {
@@ -221,27 +266,15 @@ align-items: center;
 }
 
 textarea.form-input {
-    resize: vertical;
-}
-
-@media (min-width: $sm) {
-  .modal {
-    margin-left: auto;
-    margin-right: auto;
-  }
+  resize: vertical;
 }
 
 @media (min-width: $md) {
-  .modal {
-  }
-
   .user-info-container {
     width: 50%;
   }
 }
 
 @media (min-width: $lg) {
-  .modal {
-  }
 }
 </style>
