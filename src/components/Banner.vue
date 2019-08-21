@@ -8,7 +8,7 @@
         class="hamble-brag"
       >A fast and growing software company, that build fast, elegant and high quality products.</p>
 
-      <ContactUsBtn :bgColor="'#ecc94b'" txtColor="ivory">How can we help you?</ContactUsBtn>
+      <ContactUsBtn :bgColor="'#ecc94b'" txtColor="#2d3748">How can we help you?</ContactUsBtn>
     </div>
   </div>
 </template>
