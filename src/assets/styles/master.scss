@@ -9,7 +9,7 @@ body, html {
 }
 
 body.waiting * {
-    cursor: wait;
+    cursor: wait !important;
 }
 
 * {

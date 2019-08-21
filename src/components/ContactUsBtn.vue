@@ -9,32 +9,19 @@
       <div class="modal">
         <div class="modal-wrapper">
           <h1 class="modal-label">Let's talk and make things happen.</h1>
-          <form  ref="form" @submit="submit" class="w-full max-w-lg">
+          <form ref="form" @submit="submit" class="w-full max-w-lg">
             <div class="user-info">
               <div class="form-input-container user-info-container">
                 <label class="form-label">First Name</label>
-                <input
-                  class="form-input"
-                  name="firstName"
-                  v-model="form.firstName"
-                  type="text"
-                  required
-                />
-                <!-- <p class="text-red-500 text-xs italic">Please fill out this field.</p> -->
+                <input class="form-input" name="first_name" type="text" required />
               </div>
               <div class="form-input-container user-info-container">
                 <label class="form-label" for="grid-last-name">Last Name</label>
-                <input
-                  class="form-input"
-                  name="lastName"
-                  v-model="form.lastName"
-                  type="text"
-                  required
-                />
+                <input class="form-input" name="last_name" type="text" required />
               </div>
               <div class="form-input-container">
                 <label class="form-label">Email</label>
-                <input class="form-input" name="email" v-model="form.email" type="email" required />
+                <input class="form-input" name="email" type="email" required />
               </div>
             </div>
             <div class="form-input-container">
@@ -46,7 +33,6 @@
                 type="textarea"
                 name="message"
                 rows="7"
-                v-model="form.message"
                 placeholder="Tell us about your idea or project (Shift + Enter for new line)
 "
               ></textarea>
@@ -65,17 +51,13 @@
   </div>
 </template>
 <script>
+import serialize from "form-serialize";
+
 export default {
   props: ["bgColor", "txtColor"],
   data() {
     return {
-      state: false,
-      form: {
-        firstName: null,
-        lastName: null,
-        email: null,
-        message: null
-      }
+      state: false
     };
   },
   watch: {
@@ -101,10 +83,12 @@ export default {
   methods: {
     submit(e) {
       window.document.body.classList.add("waiting");
+      let payload = serialize(e.srcElement, { hash: true });
+      console.log(payload);
       // Do the request here
       setTimeout(() => {
         window.document.body.classList.remove("waiting");
-      }, 3000)
+      }, 3000);
       return e.preventDefault();
     },
     onMessageKeypress(e) {
