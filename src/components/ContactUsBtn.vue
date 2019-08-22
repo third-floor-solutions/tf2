@@ -53,6 +53,7 @@
 <script>
 import serialize from "form-serialize";
 import AWS from "aws-sdk";
+import Swal from "sweetalert2";
 
 export default {
   props: ["bgColor", "txtColor"],
@@ -122,10 +123,18 @@ export default {
 
         const ses = new AWS.SES();
         const res = await ses.sendEmail(params).promise();
-
         this.state = false;
+        Swal.fire(
+          "Message Sent!",
+          "We'll get back to you as soon as posible.",
+          "success"
+        );
       } catch (err) {
-        console.log(err);
+        Swal.fire(
+          "Ops, Something went wrong!",
+          "It seems our server is not responding properly.",
+          "error"
+        );
       } finally {
         window.document.body.classList.remove("waiting");
       }
@@ -178,7 +187,7 @@ export default {
   bottom: 0;
   background: rgba(0, 0, 0, 0.4);
   display: none;
-  z-index: 9999;
+  z-index: 9000;
 }
 
 .modal__state:checked + .modal__container {
