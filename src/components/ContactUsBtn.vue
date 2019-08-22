@@ -68,6 +68,7 @@ export default {
         window.document.body.style.overflowY = "hidden";
       } else {
         window.document.body.style.overflowY = "auto";
+        this.$refs["form"].reset();
       }
     }
   },
@@ -198,7 +199,7 @@ export default {
 
 .modal {
   position: relative;
-  padding: 2rem;
+  padding: 0.75rem;
   text-align: left;
   //   box-shadow: 0px 0px 38px rgba(0, 0, 0, 0.2);
   width: 100vw;
@@ -298,6 +299,10 @@ textarea.form-input {
 @media (min-width: $md) {
   .user-info-container {
     width: 50%;
+  }
+
+  .modal {
+    padding: 2rem;
   }
 }
 
