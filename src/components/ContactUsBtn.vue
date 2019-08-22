@@ -13,11 +13,11 @@
             <div class="user-info">
               <div class="form-input-container user-info-container">
                 <label class="form-label">First Name</label>
-                <input class="form-input" name="first_name" type="text" required />
+                <input class="form-input" name="firstName" type="text" required />
               </div>
               <div class="form-input-container user-info-container">
                 <label class="form-label" for="grid-last-name">Last Name</label>
-                <input class="form-input" name="last_name" type="text" required />
+                <input class="form-input" name="lastName" type="text" required />
               </div>
               <div class="form-input-container">
                 <label class="form-label">Email</label>
@@ -52,6 +52,7 @@
 </template>
 <script>
 import serialize from "form-serialize";
+import AWS from "aws-sdk";
 
 export default {
   props: ["bgColor", "txtColor"],
@@ -81,20 +82,52 @@ export default {
     }
   },
   methods: {
-    submit(e) {
-      window.document.body.classList.add("waiting");
-      let payload = serialize(e.srcElement, { hash: true });
-      console.log(payload);
-      // Do the request here
-      setTimeout(() => {
-        window.document.body.classList.remove("waiting");
-      }, 3000);
-      return e.preventDefault();
+    submit(event) {
+      const payload = serialize(event.srcElement, { hash: true });
+      this.sendEmail(payload);
+      return event.preventDefault();
     },
     onMessageKeypress(e) {
       if (event.keyCode == 13 && !event.shiftKey) {
         this.$refs["submitter"].click();
         return e.preventDefault();
+      }
+    },
+    async sendEmail(payload) {
+      try {
+        const params = {
+          Destination: {
+            ToAddresses: ["franciscarl.asentista@gmail.com"]
+          },
+          Message: {
+            Body: {
+              Html: {
+                Charset: "UTF-8",
+                Data: payload.message
+              },
+              Text: {
+                Charset: "UTF-8",
+                Data: payload.message
+              }
+            },
+            Subject: {
+              Charset: "UTF-8",
+              Data: `Awesome Client Inquiry: ${payload.firstName} ${payload.lastName} - (${payload.email})`
+            }
+          },
+          Source: "franciscarl.asentista@gmail.com"
+        };
+
+        window.document.body.classList.add("waiting");
+
+        const ses = new AWS.SES();
+        const res = await ses.sendEmail(params).promise();
+
+        this.state = false;
+      } catch (err) {
+        console.log(err);
+      } finally {
+        window.document.body.classList.remove("waiting");
       }
     }
   }
