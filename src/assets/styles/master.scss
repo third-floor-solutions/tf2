@@ -1,4 +1,10 @@
-@import "./screen-size.scss";
+@import "./screen-size.scss"; 
+@import "~normalize.css/normalize.css";
+@import "~sweetalert2/src/sweetalert2.scss";
+
+.swal2-container {
+    z-index: 10000 !important;
+  }
 
 body, html {
     font-family: "Libre Franklin", Helvetica, Arial, sans-serif;
