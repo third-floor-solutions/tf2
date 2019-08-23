@@ -7,7 +7,8 @@
 
     <div class="modal__container">
       <div class="modal">
-        <div class="modal-wrapper">
+        <div v-show="sending" class="loader"></div>
+        <div v-show="!sending" class="modal-wrapper">
           <h1 class="modal-label">Let's talk and make things happen.</h1>
           <form ref="form" @submit="submit" class="w-full max-w-lg">
             <div class="user-info">
@@ -59,7 +60,8 @@ export default {
   props: ["bgColor", "txtColor"],
   data() {
     return {
-      state: false
+      state: false,
+      sending: false
     };
   },
   watch: {
@@ -68,6 +70,7 @@ export default {
         window.document.body.style.overflowY = "hidden";
       } else {
         window.document.body.style.overflowY = "auto";
+        this.$refs["form"].reset();
       }
     }
   },
@@ -96,6 +99,7 @@ export default {
     },
     async sendEmail(payload) {
       try {
+        this.sending = true;
         const params = {
           Destination: {
             ToAddresses: ["franciscarl.asentista@gmail.com"]
@@ -137,8 +141,13 @@ export default {
         );
       } finally {
         window.document.body.classList.remove("waiting");
+        this.sending = false;
       }
     }
+  },
+  beforeDestroy() {
+    window.document.body.style.overflowY = "auto";
+    this.sending = false;
   }
 };
 </script>
@@ -198,7 +207,7 @@ export default {
 
 .modal {
   position: relative;
-  padding: 2rem;
+  padding: 0.75rem;
   text-align: left;
   //   box-shadow: 0px 0px 38px rgba(0, 0, 0, 0.2);
   width: 100vw;
@@ -295,9 +304,50 @@ textarea.form-input {
   resize: vertical;
 }
 
+.loader {
+  display: flex;
+  width: 3.5em;
+  height: 3.5em;
+  border: 3px solid transparent;
+  border-top-color: #1a202c;
+  border-bottom-color: #1a202c;
+  border-radius: 50%;
+  animation: spin 1.5s linear infinite;
+}
+
+.loader:before {
+  content: "";
+  display: block;
+  margin: auto;
+  width: 0.75em;
+  height: 0.75em;
+  border: 3px solid #1a202c;
+  border-radius: 50%;
+  animation: pulse 1s alternate ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(0.5);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
 @media (min-width: $md) {
   .user-info-container {
     width: 50%;
+  }
+
+  .modal {
+    padding: 2rem;
   }
 }
 
