@@ -8,8 +8,8 @@ AWS.config.update({
   region: "us-east-1",
   maxRetries: 0,
   credentials: new AWS.Credentials({
-    accessKeyId: "AKIAIEL4UFO4V6MRIG3Q",
-    secretAccessKey: "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"
+    accessKeyId: "AKIAZWN4Q6NZW4CFWLCY",
+    secretAccessKey: "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"
   }),
 });
 
